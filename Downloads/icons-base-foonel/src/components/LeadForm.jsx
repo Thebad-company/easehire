@@ -1,249 +1,224 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Reveal from './Reveal';
 
-const LeadForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    city: '',
-    experience: '',
-    message: ''
-  });
+const trustPoints = [
+  '100% placement-oriented support',
+  '73+ modules and 25+ certifications',
+  'Scholarships, EMI, and live cohort guidance',
+  'Career support for students, professionals, freelancers, and founders',
+];
 
+const initialState = {
+  name: '',
+  email: '',
+  phone: '',
+  city: '',
+  interest: '',
+  background: '',
+  message: '',
+};
+
+function LeadForm() {
+  const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({
+      ...current,
+      [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call - replace with your actual API endpoint
+
     try {
-      // Example: await fetch('/api/leads', { method: 'POST', body: JSON.stringify(formData) });
-      console.log('Form submitted:', formData);
-      
-      // Simulate delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1200));
       setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        city: '',
-        experience: '',
-        message: ''
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitStatus(null), 5000);
+      setFormData(initialState);
     } catch {
       setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
       setIsSubmitting(false);
+      globalThis.setTimeout(() => setSubmitStatus(null), 4000);
     }
   };
 
   return (
-    <section className="py-24 px-6 bg-gradient-to-b from-[#0a0a0a] via-[#131313] to-[#1a1410] relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(229,196,131,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(229,196,131,0.02)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"></div>
-      
-      <div className="max-w-4xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/15 to-amber-600/10 border border-primary/30 mb-6 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <p className="font-label text-[#e5c483] tracking-[0.25em] uppercase text-xs font-semibold">Get Started</p>
-          </div>
-          <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Ready to Transform Your <span className="text-[#e5c483]">Career?</span>
+    <section id="apply" className="section-shell mt-10 sm:mt-16">
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <Reveal variant="left" className="panel-light p-8 sm:p-10">
+          <div className="section-kicker">Apply / Enquire</div>
+          <h2 className="mt-5 max-w-xl font-display text-3xl font-semibold leading-tight text-[#0b1630] sm:text-4xl">
+            Talk to the team about your next step.
           </h2>
-          <p className="text-[#d0c5b5] text-lg max-w-2xl mx-auto">
-            Fill out the form below and our team will get in touch with you within 24 hours
+          <p className="mt-5 max-w-xl text-base leading-8 text-[#60708b]">
+            Share your goals, background, and questions. The team can guide you on batch details, scholarships, curriculum, pricing, and career paths.
           </p>
-        </div>
 
-        {/* Form Card */}
-        <div className="bg-gradient-to-br from-[#1a1816]/95 to-[#151413]/95 backdrop-blur-xl rounded-3xl border border-primary/20 p-8 md:p-12 shadow-[0_20px_60px_rgba(229,196,131,0.15)] ring-1 ring-white/5">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name */}
+          <div className="mt-8 space-y-4">
+            {trustPoints.map((point, index) => (
+              <Reveal key={point} delay={100 + index * 70} variant="up">
+                <div className="interactive-card flex items-start gap-3 rounded-[22px] bg-[#edf3fb] px-5 py-4 text-sm leading-7 text-[#21314e]">
+                  <span className="material-symbols-outlined mt-0.5 text-[#0b1630]">check_circle</span>
+                  <span>{point}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={180} variant="up" className="mt-8 rounded-[30px] bg-[#0b1630] p-6 text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#9db0cb]">Before you submit</p>
+            <ul className="mt-4 space-y-3 text-sm leading-7 text-white/72">
+              <li className="flex items-start gap-3">
+                <span className="material-symbols-outlined mt-0.5 text-[#ffd98f]">arrow_right_alt</span>
+                <span>Use this for scholarship requests, next-batch questions, pricing, EMI, or curriculum details.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="material-symbols-outlined mt-0.5 text-[#ffd98f]">arrow_right_alt</span>
+                <span>You can ask about batch dates, scholarships, pricing, curriculum, or placement support.</span>
+              </li>
+            </ul>
+          </Reveal>
+        </Reveal>
+
+        <Reveal variant="right" delay={120} className="panel-dark p-8 sm:p-10">
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-6">
             <div>
-              <label htmlFor="name" className="block text-[#e5c483] text-sm font-semibold mb-2 uppercase tracking-wider">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-5 py-4 bg-[#0a0a0a]/50 border border-primary/20 rounded-xl text-white placeholder-[#998f81] focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
-                placeholder="Enter your full name"
-              />
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#9db0cb]">Get a callback</p>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">Tell the team what you need.</h3>
             </div>
+            <div className="rounded-full bg-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/64">
+              Usually within 24h
+            </div>
+          </div>
 
-            {/* Email and Phone */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="email" className="block text-[#e5c483] text-sm font-semibold mb-2 uppercase tracking-wider">
-                  Email Address *
-                </label>
+          <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-white/76">Full name</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your full name"
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition placeholder:text-white/30 focus:border-[#ffd98f] focus:bg-white/8"
+                />
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-white/76">Email</span>
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-5 py-4 bg-[#0a0a0a]/50 border border-primary/20 rounded-xl text-white placeholder-[#998f81] focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
-                  placeholder="your@email.com"
+                  placeholder="you@example.com"
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition placeholder:text-white/30 focus:border-[#ffd98f] focus:bg-white/8"
                 />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-[#e5c483] text-sm font-semibold mb-2 uppercase tracking-wider">
-                  Phone Number *
-                </label>
+              </label>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-white/76">Phone</span>
                 <input
                   type="tel"
-                  id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-5 py-4 bg-[#0a0a0a]/50 border border-primary/20 rounded-xl text-white placeholder-[#998f81] focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
-                  placeholder="+91 XXXXX XXXXX"
+                  placeholder="+91 98765 43210"
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition placeholder:text-white/30 focus:border-[#ffd98f] focus:bg-white/8"
                 />
-              </div>
-            </div>
+              </label>
 
-            {/* City and Experience */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="city" className="block text-[#e5c483] text-sm font-semibold mb-2 uppercase tracking-wider">
-                  City
-                </label>
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-white/76">City</span>
                 <input
                   type="text"
-                  id="city"
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  className="w-full px-5 py-4 bg-[#0a0a0a]/50 border border-primary/20 rounded-xl text-white placeholder-[#998f81] focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
                   placeholder="Your city"
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition placeholder:text-white/30 focus:border-[#ffd98f] focus:bg-white/8"
                 />
-              </div>
-              <div>
-                <label htmlFor="experience" className="block text-[#e5c483] text-sm font-semibold mb-2 uppercase tracking-wider">
-                  Experience Level
-                </label>
-                <select
-                  id="experience"
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleChange}
-                  className="w-full px-5 py-4 bg-[#0a0a0a]/50 border border-primary/20 rounded-xl text-white focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
-                >
-                  <option value="">Select experience</option>
-                  <option value="beginner">Beginner (0-1 years)</option>
-                  <option value="intermediate">Intermediate (1-3 years)</option>
-                  <option value="advanced">Advanced (3+ years)</option>
-                  <option value="student">Student</option>
-                </select>
-              </div>
+              </label>
             </div>
 
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="block text-[#e5c483] text-sm font-semibold mb-2 uppercase tracking-wider">
-                Message (Optional)
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-white/76">What are you asking about?</span>
+                <select
+                  name="interest"
+                  value={formData.interest}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition focus:border-[#ffd98f] focus:bg-white/8"
+                >
+                  <option value="" className="text-[#0b1630]">Select an option</option>
+                  <option value="next-batch" className="text-[#0b1630]">Next batch details</option>
+                  <option value="curriculum" className="text-[#0b1630]">Curriculum and placement support</option>
+                  <option value="scholarship" className="text-[#0b1630]">Scholarship information</option>
+                  <option value="emi" className="text-[#0b1630]">Pricing and EMI</option>
+                </select>
               </label>
+
+              <label className="block">
+                <span className="mb-2 block text-sm font-semibold text-white/76">Your background</span>
+                <select
+                  name="background"
+                  value={formData.background}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition focus:border-[#ffd98f] focus:bg-white/8"
+                >
+                  <option value="" className="text-[#0b1630]">Select your background</option>
+                  <option value="student" className="text-[#0b1630]">Student</option>
+                  <option value="job-seeker" className="text-[#0b1630]">Job seeker</option>
+                  <option value="professional" className="text-[#0b1630]">Working professional</option>
+                  <option value="entrepreneur" className="text-[#0b1630]">Entrepreneur</option>
+                  <option value="freelancer" className="text-[#0b1630]">Freelancer</option>
+                </select>
+              </label>
+            </div>
+
+            <label className="block">
+              <span className="mb-2 block text-sm font-semibold text-white/76">Message</span>
               <textarea
-                id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 rows="4"
-                className="w-full px-5 py-4 bg-[#0a0a0a]/50 border border-primary/20 rounded-xl text-white placeholder-[#998f81] focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all resize-none"
-                placeholder="Tell us about your goals and what you hope to achieve..."
-              ></textarea>
-            </div>
+                placeholder="Tell the team what you want help with."
+                className="w-full rounded-[24px] border border-white/12 bg-white/6 px-4 py-3.5 text-white outline-none transition placeholder:text-white/30 focus:border-[#ffd98f] focus:bg-white/8"
+              />
+            </label>
 
-            {/* Submit Button */}
-            <div className="pt-4">
-              <div className="relative group">
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-primary via-amber-400 to-primary opacity-75 blur-xl group-hover:opacity-100 group-hover:blur-2xl transition-all duration-500 rounded-full"></div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="relative w-full bg-gradient-to-r from-[#e5c483] via-[#f0d499] to-[#e5c483] text-[#2a1f0a] px-10 py-5 rounded-full font-bold text-sm tracking-[0.15em] uppercase hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_20px_60px_-15px_rgba(229,196,131,0.5)] disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-3">
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Submitting...
-                    </span>
-                  ) : (
-                    'Get Free Consultation'
-                  )}
-                </button>
-              </div>
-            </div>
+            <button type="submit" disabled={isSubmitting} className="cta-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-60">
+              {isSubmitting ? 'Submitting...' : 'Request a Callback'}
+            </button>
 
-            {/* Status Messages */}
             {submitStatus === 'success' && (
-              <div className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/30 rounded-xl">
-                <span className="material-symbols-outlined text-green-500" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                <p className="text-green-500 text-sm font-semibold">Thank you! We'll contact you within 24 hours.</p>
+              <div className="rounded-[22px] border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
+                Thanks. Your enquiry has been captured in this demo and the form has been reset.
               </div>
             )}
 
             {submitStatus === 'error' && (
-              <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                <span className="material-symbols-outlined text-red-500">error</span>
-                <p className="text-red-500 text-sm font-semibold">Something went wrong. Please try again.</p>
+              <div className="rounded-[22px] border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
+                Something went wrong while simulating the submission.
               </div>
             )}
           </form>
-
-          {/* Privacy Note */}
-          <p className="text-[#998f81] text-xs text-center mt-6">
-            By submitting this form, you agree to our privacy policy. We respect your data and will never share it with third parties.
-          </p>
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-[#d0c5b5] text-sm">
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#e5c483]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-            <span>100% Secure</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#e5c483]" style={{ fontVariationSettings: "'FILL' 1" }}>schedule</span>
-            <span>24hr Response Time</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#e5c483]" style={{ fontVariationSettings: "'FILL' 1" }}>support_agent</span>
-            <span>Free Consultation</span>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
-};
+}
 
 export default LeadForm;

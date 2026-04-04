@@ -1,27 +1,42 @@
-import React from 'react';
+const footerLinks = [
+  { label: 'Program', href: '#program' },
+  { label: 'Career Paths', href: '#curriculum' },
+  { label: 'Scholarship', href: '#scholarship' },
+  { label: 'Apply', href: '#apply' },
+];
 
-const Footer = () => {
+function Footer() {
   return (
-    <footer className="bg-[#0e0e0e] full-width border-t border-[#4d463a]/20">
-      <div className="flex flex-col md:flex-row justify-between items-center w-full px-12 py-12 gap-8 max-w-screen-2xl mx-auto">
-        <div><img src="/logo.png" alt="IconsBase" className="h-8 w-auto object-contain opacity-90 brightness-0 invert" /></div>
-        <div className="flex flex-wrap justify-center gap-8">
-          {["Privacy", "Terms", "Editorial Guidelines", "Support"].map((item) => (
-            <a
-              key={item}
-              className="font-body text-[10px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100"
-              href="#"
-            >
-              {item}
-            </a>
-          ))}
+    <footer className="mt-12 border-t border-[#0b1630]/10 bg-[#f5f0e7] sm:mt-20">
+      <div className="section-shell py-10">
+        <div className="flex flex-col gap-8 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+          <div className="mx-auto lg:mx-0">
+            <img src="/logo.png" alt="IconsBase" className="h-12 w-auto" />
+            <p className="mt-4 max-w-md text-sm leading-7 text-[#60708b]">
+              AI-first digital marketing learning with live cohorts, mentor-led guidance, scholarships, and career-focused support.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-5 text-sm font-semibold text-[#51617a]">
+            {footerLinks.map((link) => (
+              <a key={link.label} href={link.href} className="transition hover:text-[#0b1630]">
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          <a href="#apply" className="cta-primary w-full justify-center sm:w-auto">
+            Apply Now
+          </a>
         </div>
-        <div className="font-body text-[10px] tracking-widest uppercase text-on-surface-variant opacity-60">
-          © 2026 IconsBase. The Digital Curator.
+
+        <div className="mt-8 flex flex-col gap-2 border-t border-[#0b1630]/10 pt-6 text-sm text-[#60708b] sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 IconsBase. The AI Institute.</p>
+          <p>AI-first digital marketing learning with mentor-led guidance and career-focused support.</p>
         </div>
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

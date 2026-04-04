@@ -1,106 +1,54 @@
-import React from 'react';
+import Reveal from './Reveal';
 
-const Testimonials = () => {
-  const students = [
-    {
-      name: "Priya Venkataraman",
-      role: "Performance Marketing Manager, Swiggy",
-      quote: "I had done 3 other courses before IconsBase. None of them prepared me for what actually happens inside an agency. IconsBase did in 12 weeks what others couldn't in a year.",
-      tag: "₹8L package",
-      color: "from-[#FF6600] to-[#FF9933]",
-      initials: "PV"
-    },
-    {
-      name: "Arjun Mehta",
-      role: "Freelance AI-Marketing Consultant",
-      quote: "Within 60 days of completing the program, I had 4 retainer clients paying me ₹55,000/month each. The AI tools module alone was worth 10x the course fee.",
-      tag: "₹2.2L/month freelance",
-      color: "from-primary to-primary-fixed-dim",
-      initials: "AM"
-    },
-    {
-      name: "Sneha Pillai",
-      role: "Digital Marketing Lead, Razorpay",
-      quote: "The live campaign projects were the difference. I walked into my interview with actual ROAS numbers and a real case study. They hired me on the spot.",
-      tag: "Hired in 45 days",
-      color: "from-[#1B263B] to-[#415A77]",
-      initials: "SP"
-    },
-    {
-      name: "Rahul Krishnamurthy",
-      role: "Growth Marketing Manager, Zepto",
-      quote: "I was a BCA fresher with zero experience. IconsBase gave me a structured path, real mentorship, and the exact skills the market was asking for. First job: ₹6L CTC.",
-      tag: "₹6L as a fresher",
-      color: "from-[#3E215D] to-[#6B4E91]",
-      initials: "RK"
-    }
-  ];
+const audiences = [
+  { title: 'Students', icon: 'school', description: 'For learners who want a structured path into digital marketing without guessing what matters first.' },
+  { title: 'Entrepreneurs', icon: 'storefront', description: 'For founders who want better growth systems, clearer acquisition thinking, and AI-assisted marketing workflows.' },
+  { title: 'Working Professionals', icon: 'badge', description: 'For operators and marketers who need sharper skills and stronger positioning in an AI-shifted market.' },
+  { title: 'Job Seekers', icon: 'work', description: 'For candidates trying to turn learning into interviews, portfolios, and credible role readiness.' },
+  { title: 'Influencers / YouTubers', icon: 'videocam', description: 'For creators who want better content systems, monetization support, and audience growth mechanics.' },
+  { title: 'Freelancers', icon: 'bolt', description: 'For independent marketers looking to package services, improve execution, and raise perceived value.' },
+];
 
-  const companies = ["Meesho", "CRED", "upGrad", "PhonePe", "Zomato", "Freshworks", "Paytm", "OLA", "Flipkart", "Swiggy"];
-
+function Testimonials() {
   return (
-    <section className="py-32 bg-[#1c1e26] text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-20">
-          <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-[1px] bg-primary"></div>
-              <span className="font-label uppercase tracking-[0.3em] text-[10px] text-primary font-bold">Real Results</span>
-            </div>
-            <h2 className="font-headline text-5xl md:text-6xl font-bold leading-tight">
-              People who stopped <br/>
-              <span className="text-primary italic">learning</span> and started <br/>
-              <span className="text-white italic opacity-90">earning.</span>
-            </h2>
-          </div>
-          <div className="lg:max-w-md pt-6">
-            <p className="text-white/60 text-lg font-light leading-relaxed">
-              These aren't cherry-picked success stories. These are typical outcomes for students who complete the full program.
-            </p>
-          </div>
-        </div>
+    <section id="audience" className="section-shell mt-10 sm:mt-16">
+      <div className="grid gap-6 lg:grid-cols-[0.86fr_1.14fr]">
+        <Reveal variant="left" className="panel-dark p-8 sm:p-10">
+          <div className="section-kicker border-white/10 bg-white/5 text-white/72">Who Can Join</div>
+          <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
+            Choose the path that matches your stage and ambition.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-8 text-white/68">
+            Whether you are starting out, switching roles, freelancing, or growing a brand, the program is designed to meet you where you are.
+          </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
-          {students.map((s, i) => (
-            <div key={i} className="bg-white/5 p-8 rounded-[2rem] border border-white/10 hover:bg-white/[0.08] transition-all duration-500 group flex flex-col justify-between h-full">
-              <div className="space-y-6">
-                <div className="flex text-primary">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  ))}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {['Students', 'Job seekers', 'Freelancers', 'Professionals'].map((label, index) => (
+              <Reveal key={label} delay={110 + index * 70} variant="up">
+                <div className="interactive-card rounded-[24px] border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-white/74">
+                  {label}
                 </div>
-                <p className="text-sm font-light leading-relaxed text-white/80 italic">
-                  "{s.quote}"
-                </p>
-                <div className="inline-block bg-primary/10 border border-primary/20 rounded-full px-4 py-1">
-                  <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{s.tag}</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-4 pt-8">
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${s.color} flex items-center justify-center text-xs font-bold text-white shadow-lg`}>
-                  {s.initials}
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-white mb-0.5">{s.name}</div>
-                  <div className="text-[9px] text-white/40 uppercase tracking-widest font-bold leading-tight">{s.role}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center space-y-12">
-          <p className="font-label text-[10px] uppercase tracking-[0.4em] text-white/30 font-bold">Our Students Work At</p>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 opacity-40 grayscale group hover:grayscale-0 transition-all duration-1000">
-            {companies.map((c, i) => (
-              <span key={i} className="text-lg font-headline font-bold tracking-tight hover:text-primary transition-colors cursor-default">{c}</span>
+              </Reveal>
             ))}
           </div>
+        </Reveal>
+
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {audiences.map((item, index) => (
+            <Reveal key={item.title} delay={70 + index * 60} variant="up">
+              <article className="panel-light interactive-card h-full p-7">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0b1630] text-white shadow-[0_18px_35px_rgba(11,22,48,0.18)]">
+                  <span className="material-symbols-outlined icon-hover">{item.icon}</span>
+                </div>
+                <h3 className="mt-5 font-display text-2xl font-semibold text-[#0b1630]">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#60708b]">{item.description}</p>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default Testimonials;

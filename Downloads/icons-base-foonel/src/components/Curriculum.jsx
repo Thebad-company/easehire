@@ -1,56 +1,87 @@
-import React from 'react';
+import Reveal from './Reveal';
 
-const Curriculum = () => {
-  const modules = [
-    {
-      icon: "smart_toy",
-      title: "AI Tools stack",
-      desc: "Mastering Claude, GPT-4, and Midjourney for creative at scale."
-    },
-    {
-      icon: "ads_click",
-      title: "Paid Media",
-      desc: "Meta, Google, and TikTok ads from setup to optimization."
-    },
-    {
-      icon: "rocket_launch",
-      title: "Live Campaigns",
-      desc: "Running actual budgets on live projects for real clients."
-    },
-    {
-      icon: "work",
-      title: "Freelance OS",
-      desc: "The business of marketing: Pricing, Proposals, and High-ticket sales."
-    }
-  ];
+const tracks = [
+  {
+    tag: 'Track 01',
+    title: 'Core learning foundation',
+    description: 'Built for fundamentals, AI workflow fluency, platform understanding, and certification-ready confidence.',
+    bullets: ['Gen AI tools and prompt workflows', 'Marketing basics across major channels', 'Structured modules and mentor checkpoints'],
+  },
+  {
+    tag: 'Track 02',
+    title: 'Career launch and execution',
+    description: 'Built for practical work, live-project thinking, internship pathways, and placement-focused preparation.',
+    bullets: ['Live sessions and project feedback', 'Internship and placement support', 'Role clarity for job seekers and upskillers'],
+  },
+];
 
+const roleOutcomes = [
+  'Digital Marketing Specialist',
+  'SEO Expert',
+  'PPC Specialist',
+  'Social Media Manager',
+  'E-commerce Marketer',
+];
+
+function Curriculum() {
   return (
-    <section className="py-32 px-8 bg-[#f5f2eb]">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="font-headline text-4xl font-bold mb-4 text-[#1c1c1c]">A Curriculum Designed for the 1%.</h2>
-            <p className="text-[#666]">We don't teach "social media posting." We teach digital engineering.</p>
-          </div>
-          <button className="text-primary font-label text-xs tracking-widest uppercase flex items-center gap-2 group transition-all hover:text-primary-container">
-            View Full Curriculum <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </button>
+    <section id="curriculum" className="section-shell mt-10 sm:mt-16">
+      <Reveal variant="up" className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div className="section-kicker">Career Paths</div>
+          <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-[#0b1630] sm:text-4xl">
+            Two tracks that take you from foundation to execution.
+          </h2>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {modules.map((module, index) => (
-            <div key={index} className="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all duration-300 hover:border-primary/20 group">
-              <div className="w-10 h-10 rounded-lg bg-surface flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined">{module.icon}</span>
+        <p className="max-w-xl text-base leading-8 text-[#60708b]">
+          Move from foundations to execution through two clear tracks built for modern digital marketing careers.
+        </p>
+      </Reveal>
+
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        {tracks.map((track, index) => (
+          <Reveal key={track.title} delay={100 + index * 90} variant="up">
+            <article className="panel-light interactive-card p-8 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#60708b]">{track.tag}</p>
+              <h3 className="mt-3 font-display text-3xl font-semibold text-[#0b1630]">{track.title}</h3>
+              <p className="mt-4 text-base leading-8 text-[#52627c]">{track.description}</p>
+              <ul className="mt-6 space-y-3 text-sm leading-7 text-[#21314e]">
+                {track.bullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start gap-3">
+                    <span className="material-symbols-outlined icon-hover mt-0.5 text-[#0b1630]">check_circle</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal delay={120} variant="up" className="mt-6 panel-light p-8 sm:p-10">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#60708b]">Role Outcomes</p>
+            <h3 className="mt-3 font-display text-3xl font-semibold text-[#0b1630]">Career paths you can grow into.</h3>
+          </div>
+          <div className="gold-badge">5 role paths</div>
+        </div>
+
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {roleOutcomes.map((role, index) => (
+            <Reveal key={role} delay={140 + index * 70} variant="scale">
+              <div className="interactive-card rounded-[24px] border border-[#0b1630]/10 bg-[#f7f3eb] p-5">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0b1630] text-white">
+                  <span className="material-symbols-outlined icon-hover">trending_up</span>
+                </div>
+                <p className="mt-4 font-display text-xl font-semibold leading-tight text-[#0b1630]">{role}</p>
               </div>
-              <h4 className="font-bold mb-2 text-on-surface uppercase tracking-wide text-sm">{module.title}</h4>
-              <p className="text-xs text-on-surface-variant leading-relaxed">{module.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
-};
+}
 
 export default Curriculum;

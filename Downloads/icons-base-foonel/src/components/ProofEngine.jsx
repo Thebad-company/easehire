@@ -1,56 +1,93 @@
-import React from 'react';
-import analyticsMain from '../assets/analytics-main.png';
 import workspaceImg from '../assets/workspace.png';
+import Reveal from './Reveal';
 
-const ProofEngine = () => {
+const pillars = [
+  {
+    icon: 'co_present',
+    title: 'Mentor-led live sessions',
+    text: 'Learn from practitioners through live sessions, reviews, and direct guidance.',
+  },
+  {
+    icon: 'lab_profile',
+    title: 'Practical and hands-on',
+    text: 'Apply concepts through assignments, projects, and performance-led thinking.',
+  },
+  {
+    icon: 'work_history',
+    title: 'Career movement built in',
+    text: 'Build toward internships, placement support, and role-specific readiness.',
+  },
+];
+
+const details = [
+  'Laptop-friendly learning with a clear path into practical execution.',
+  'Suitable for students, job seekers, freelancers, and working professionals.',
+  'Balanced across strategy, tools, certification support, and career outcomes.',
+];
+
+function ProofEngine() {
   return (
-    <section className="py-32 px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h2 className="font-headline text-4xl font-bold mb-4 text-on-surface">The Proof Engine</h2>
-          <p className="text-on-surface-variant font-light">Real execution, real results, real students.</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
-          {/* Main Large Card */}
-          <div className="md:col-span-8 bg-[#f5f2eb] rounded-3xl overflow-hidden group border border-outline-variant/10 relative shadow-2xl">
-            <img 
-              alt="Dashboard analytics" 
-              className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" 
-              src={analyticsMain}
+    <section id="experience" className="section-shell mt-10 sm:mt-16">
+      <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <Reveal variant="left" className="panel-light interactive-card overflow-hidden p-3 shadow-[0_32px_80px_rgba(10,18,35,0.08)]">
+          <div className="interactive-media relative overflow-hidden rounded-[28px]">
+            <img
+              src={workspaceImg}
+              alt="Mentor-led classroom and project environment"
+              className="h-[260px] w-full object-cover sm:h-[380px] md:h-[500px]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-12 flex flex-col justify-end">
-              <div className="text-primary font-bold mb-2 tracking-[0.3em] uppercase text-xs">Campaign Snapshot</div>
-              <h4 className="text-3xl md:text-5xl font-headline font-bold text-on-surface">$140k/mo Managed Ad Spend</h4>
-            </div>
-          </div>
-          
-          {/* Side Column */}
-          <div className="md:col-span-4 grid grid-rows-2 gap-6">
-            <div className="bg-surface-container-high rounded-3xl p-8 border border-outline-variant/10 hover:shadow-[0_0_50px_rgba(229,196,131,0.15)] transition-all duration-500 group flex flex-col justify-center">
-              <div className="text-5xl font-headline font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">320%</div>
-              <p className="text-sm font-label uppercase tracking-[0.2em] mb-4 text-on-surface-variant font-bold">Average ROAS</p>
-              <p className="text-xs text-on-surface-variant leading-relaxed italic opacity-80">
-                "IconsBase taught me more in 3 weeks about execution than my degree did in 3 years."
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b1630]/78 via-[#0b1630]/25 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#d2def1]">Inside the experience</p>
+              <p className="mt-3 max-w-lg font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                Mentor-led sessions, practical work, and career-focused guidance in one learning environment.
               </p>
             </div>
-            
-            <div className="bg-surface-container rounded-3xl overflow-hidden group border border-outline-variant/10 relative shadow-xl">
-              <img 
-                alt="Workspace" 
-                className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000" 
-                src={workspaceImg}
-              />
-              <div className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-surface-container-highest/90 to-transparent">
-                <p className="text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Curated Workspace</p>
-                <p className="text-[10px] uppercase tracking-widest text-primary font-bold">Execution Specialist Sandbox</p>
-              </div>
-            </div>
           </div>
-        </div>
+        </Reveal>
+
+        <Reveal variant="right" delay={120}>
+          <div className="section-kicker">Institute Experience</div>
+          <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-[#0b1630] sm:text-4xl">
+            Experience how the program is taught, practiced, and applied.
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-[#60708b]">
+            The learning model blends mentor guidance, hands-on practice, and career support so students can move from theory to confident execution.
+          </p>
+
+          <div className="mt-8 space-y-4">
+            {pillars.map((pillar, index) => (
+              <Reveal key={pillar.title} delay={140 + index * 80} variant="up">
+                <article className="panel-light interactive-card p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0b1630] text-white">
+                      <span className="material-symbols-outlined icon-hover">{pillar.icon}</span>
+                    </div>
+                    <div>
+                      <h3 className="font-display text-2xl font-semibold text-[#0b1630]">{pillar.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-[#60708b]">{pillar.text}</p>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={220} variant="up" className="mt-6 rounded-[28px] bg-[#edf3fb] p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#60708b]">Useful details</p>
+            <ul className="mt-4 space-y-3 text-sm leading-7 text-[#21314e]">
+              {details.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="material-symbols-outlined mt-0.5 text-[#0b1630]">arrow_right_alt</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </Reveal>
       </div>
     </section>
   );
-};
+}
 
 export default ProofEngine;
