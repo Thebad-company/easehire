@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-on-surface antialiased overflow-x-hidden bg-background;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-nav {
+    @apply bg-white/70 backdrop-blur-xl shadow-xl;
+  }
+
+  .grid-pattern {
+    background-image: radial-gradient(#bbcabf 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.15;
+  }
+
+  .hero-glow {
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, rgba(254, 166, 25, 0.1) 40%, transparent 70%);
+  }
+
+  .arc-container {
+    perspective: 1000px;
+  }
+
+  .dashed-arc {
+    border: 2px dashed rgba(16, 185, 129, 0.2);
+    border-bottom: 0;
+    border-radius: 1000px 1000px 0 0;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  }
+}
